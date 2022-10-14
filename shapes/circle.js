@@ -1,14 +1,16 @@
 /**
  * This is a dot centered at a particular point in space
  */
-export class Point {
+export class Circle {
   /**
    *
-   * @param {{ x: number, y: number, control?: boolean}}
+   * @param {{ x: number, y: number, radius: number, control?: boolean}}
    */
-  constructor({ x, y, control = false }) {
+  constructor({ x, y, radius, control = false }) {
     this.x = x;
     this.y = y;
+    this.radius = radius;
+
     this.control = control;
   }
 
@@ -22,7 +24,7 @@ export class Point {
     context.fillStyle = this.control ? "red" : "black";
 
     context.beginPath();
-    context.arc(0, 0, 10, 0, Math.PI * 2);
+    context.arc(0, 0, this.radius, 0, Math.PI * 2);
     context.fill();
 
     context.restore();

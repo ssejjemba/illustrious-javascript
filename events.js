@@ -3,7 +3,7 @@ export class DragRecognizer {
   lastKnownPosition = { x: 0, y: 0 };
   /**
    *
-   * @param {HTMLCanvasElement | Window} target
+   * @param {HTMLCanvasElement} target
    * @param {{ onDragStart?: dragEdgeCallback, onDrag: dragCallback, onDragEnd?: dragEdgeCallback}} callHandler
    */
   constructor(target, callHandler) {
@@ -29,11 +29,11 @@ export class DragRecognizer {
     this.isDragging = true;
     this.target.addEventListener("mousemove", this.mousemove);
     this.target.addEventListener("mouseup", this.mouseup);
-    const x = (e.offsetX / this.target.offsetWidth) * this.target.offsetWidth;
-    const y = (e.offsetY / this.target.offsetHeight) * this.target.offsetHeight;
+    const x = (e.offsetX / this.target.offsetWidth) * this.target.width;
+    const y = (e.offsetY / this.target.offsetHeight) * this.target.height;
     this.lastKnownPosition = { x, y };
     if (this.callHandler.onDragStart) {
-      this.callHandler.onDragStart({ e });
+      this.callHandler.onDragStart({ x, y, e });
     }
   };
 
@@ -47,8 +47,8 @@ export class DragRecognizer {
       return false;
     }
 
-    const x = (e.offsetX / this.target.offsetWidth) * this.target.offsetWidth;
-    const y = (e.offsetY / this.target.offsetHeight) * this.target.offsetHeight;
+    const x = (e.offsetX / this.target.offsetWidth) * this.target.width;
+    const y = (e.offsetY / this.target.offsetHeight) * this.target.height;
 
     const dx = x - this.lastKnownPosition.x;
     const dy = y - this.lastKnownPosition.y;
@@ -80,5 +80,5 @@ export class DragRecognizer {
 
 /**
  * @callback dragEdgeCallback
- * @param {{  e: MouseEvent}}
+ * @param {{  x?: number, y?: number, e: MouseEvent}}
  */
