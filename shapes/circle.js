@@ -4,14 +4,18 @@
 export class Circle {
   /**
    *
-   * @param {{ x: number, y: number, radius: number, control?: boolean}}
+   * @param {{ x: number, y: number, radius: number, control?: boolean, lineWidth?: number, color?: string}}
    */
-  constructor({ x, y, radius, control = false }) {
+  constructor({ x, y, radius, control = false, lineWidth, color }) {
     this.x = x;
     this.y = y;
     this.radius = radius;
+    this.lineWidth = lineWidth;
+    this.color = color;
 
     this.control = control;
+    this.ix = x;
+    this.iy = y;
   }
 
   /**
