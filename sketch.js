@@ -1,5 +1,6 @@
 const canvasSketch = require("canvas-sketch");
 const math = require("canvas-sketch-util/math");
+const { Point } = require("./point");
 
 const settings = {
   dimensions: [1080, 1080],
@@ -10,9 +11,26 @@ const settings = {
  * @returns {function({ context: CanvasRenderingContext2D, width: number, height: number})}
  */
 const sketch = () => {
+  const points = [
+    new Point({ x: 200, y: 540 }),
+    new Point({ x: 400, y: 300, control: true }),
+    new Point({ x: 880, y: 540 }),
+  ];
   return ({ context, width, height }) => {
     context.fillStyle = "white";
     context.fillRect(0, 0, width, height);
+
+    context.beginPath();
+    context.moveTo(points[0].x, points[0].y);
+    context.quadraticCurveTo(
+      points[1].x,
+      points[1].y,
+      points[2].x,
+      points[2].y
+    );
+    context.stroke();
+
+    points.forEach((point) => point.draw(context));
   };
 };
 

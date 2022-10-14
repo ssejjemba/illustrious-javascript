@@ -1,14 +1,12 @@
 /**
  * This is a dot centered at a particular point in space
  */
-class Point {
+export class Point {
   /**
    *
-   * @param {number} x
-   * @param {number} y
-   * @param {boolean?} control
+   * @param {{ x: number, y: number, control?: boolean}}
    */
-  constructor(x, y, control = false) {
+  constructor({ x, y, control = false }) {
     this.x = x;
     this.y = y;
     this.control = control;
@@ -24,7 +22,7 @@ class Point {
     context.fillStyle = this.control ? "red" : "black";
 
     context.beginPath();
-    context.arc(0, 0, 5, 0, Math.PI * 2);
+    context.arc(0, 0, 10, 0, Math.PI * 2);
     context.fill();
 
     context.restore();
