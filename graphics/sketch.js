@@ -1,6 +1,6 @@
 const canvasSketch = require("canvas-sketch");
 const math = require("canvas-sketch-util/math");
-const { DragRecognizer } = require("../events");
+const { DragRecognizer } = require("../utility/events");
 const { isHitCircle } = require("../physics/hit");
 const { Circle } = require("../shapes/circle");
 
